@@ -5,7 +5,10 @@
   "main": "src/infra/web-server/index.js",
   "scripts": {
     "start": "node src/infra/web-server/index.js",
-    "test": "jest  --colors --noStackTrace --passWithNoTests --runInBand --detectOpenHandles --forceExit --coverage --silent"
+    "test": "jest  --colors --noStackTrace --passWithNoTests --runInBand --detectOpenHandles --forceExit --coverage --silent",
+    "db:make": "npx knex --knexfile src/infra/config/knexfile.js migrate:make",
+    "db:run": "npx knex --knexfile src/infra/config/knexfile.js migrate:latest",
+    "db:rollback": "npx knex --knexfile src/infra/config/knexfile.js migrate:rollback"
   },
   "keywords": [],
   "author": "Francisco Viana <franciscoviana862@gmail.com>",
@@ -15,7 +18,8 @@
     "express": "^4.17.1",
     "fast-glob": "^3.2.5",
     "knex": "^0.20.13",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "eslint": "^7.13.0",
