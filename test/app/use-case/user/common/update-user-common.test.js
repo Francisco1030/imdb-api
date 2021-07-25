@@ -115,7 +115,6 @@ describe("use-case: update user common", () => {
 
     mockReturnUserCommonRepository(userRepositorySpy, userNotAdmin);
 
-
     await expect(sut.handle(userNotAdmin)).rejects.toThrow();
     await expect(sut.handle(userNotAdmin)).rejects.toThrow(ValidationError);
     await expect(sut.handle(userNotAdmin)).rejects.toThrow("Usuario é admin");

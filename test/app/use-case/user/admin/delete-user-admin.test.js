@@ -110,7 +110,6 @@ describe("use-case: delete user admin", () => {
 
     mockReturnUserAdminRepository(userRepositorySpy, userNotAdmin);
 
-
     await expect(sut.handle(userNotAdmin)).rejects.toThrow();
     await expect(sut.handle(userNotAdmin)).rejects.toThrow(ValidationError);
     await expect(sut.handle(userNotAdmin)).rejects.toThrow("Usuario não é admin");
