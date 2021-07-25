@@ -2,15 +2,20 @@
   "name": "imdb-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/infra/web-server/index.js",
   "scripts": {
+    "start": "node src/infra/web-server/index.js",
     "test": "jest  --colors --noStackTrace --passWithNoTests --runInBand --detectOpenHandles --forceExit --coverage --silent"
   },
   "keywords": [],
   "author": "Francisco Viana <franciscoviana862@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "express": "^4.17.1",
+    "fast-glob": "^3.2.5",
+    "knex": "^0.20.13",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "eslint": "^7.13.0",
