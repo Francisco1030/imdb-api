@@ -8,8 +8,8 @@ module.exports = class CreateUserCommonUseCase {
 
   async handle(input) {
     const inputBoundary = new InputBoundary(input);
-    const userAdminCreated = await this.userRepository.create(inputBoundary);
+    const userCommunCreated = await this.userRepository.create(inputBoundary);
 
-    return new OutputBoundary(userAdminCreated);
+    return new OutputBoundary(userCommunCreated);
   }
 };
