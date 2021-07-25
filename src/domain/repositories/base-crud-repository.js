@@ -31,8 +31,8 @@ module.exports = class BaseCrudRepository {
   }
 
   /*
-   * @param {Sting} id
-   * @returns void
+   * @param {Entity} entity
+   * @returns {Entity} entity
    */
   delete(id) {
     throw new Error('Method not implement');
