@@ -32,7 +32,7 @@ const mockReturnUserCommonRepository = (userRepositorySpy, userCommon) => {
   return mockReturn;
 }
 
-describe("use-case: create user admin", () => {
+describe("use-case: create user common", () => {
 
   test("Should return user", async () => {
     const { sut, userCommon, userRepositorySpy } = makeSut();
