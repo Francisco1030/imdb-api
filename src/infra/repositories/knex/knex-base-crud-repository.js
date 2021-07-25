@@ -1,6 +1,6 @@
 const BaseRepository = require('../../../domain/repositories/base-crud-repository');
 const { NotFoundError } = require('../../../shared/utils/errors');
-const knex = require('../../../config/knex');
+const knex = require('../../config/knex');
 
 module.exports = class KnexBaseRepository extends BaseRepository {
   constructor() {
