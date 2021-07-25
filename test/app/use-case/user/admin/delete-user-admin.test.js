@@ -1,5 +1,6 @@
 const DeleteUserAdminUseCase = require('../../../../../src/app/use-case/user/admin/delete/delete-user-admin');
 const UserRepositorySpy = require('../../../../mocks/user-repository');
+const OutputBoundary = require('../../../../../src/app/use-case/user/admin/delete/output-boundary');
 const { ValidationError } = require('../../../../../src/shared/utils/errors');
 
 const makeUserAdminSpyData = () => ({
@@ -43,6 +44,14 @@ describe("use-case: delete user admin", () => {
     const userAdminUpdated = await sut.handle(userAdmin);
 
     expect(userAdminUpdated).toEqual(returnMocks);
+  });
+
+  test("Should return instanceof OutputBoundary", async () => {
+    const { sut, userAdmin, userRepositorySpy } = makeSut();
+    mockReturnUserAdminRepository(userRepositorySpy, userAdmin);
+    const userAdminUpdated = await sut.handle(userAdmin);
+
+    expect(userAdminUpdated).toBeInstanceOf(OutputBoundary);
   });
 
   test("Should validate deletedAt is not null", async () => {

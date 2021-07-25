@@ -1,5 +1,6 @@
 const DeleteUserCommonUseCase = require('../../../../../src/app/use-case/user/common/delete/delete-user-common');
 const UserRepositorySpy = require('../../../../mocks/user-repository');
+const OutputBoundary = require('../../../../../src/app/use-case/user/common/delete/output-boundary');
 const { ValidationError } = require('../../../../../src/shared/utils/errors');
 
 const makeUserCommonSpyData = () => ({
@@ -43,6 +44,14 @@ describe("use-case: delete user common", () => {
     const userCommonUpdated = await sut.handle(userCommon);
 
     expect(userCommonUpdated).toEqual(returnMocks);
+  });
+
+  test("Should return instanceof OutputBoundary", async () => {
+    const { sut, userCommon, userRepositorySpy } = makeSut();
+    mockReturnUserCommonRepository(userRepositorySpy, userCommon);
+    const userAdminUpdated = await sut.handle(userCommon);
+
+    expect(userAdminUpdated).toBeInstanceOf(OutputBoundary);
   });
 
   test("Should validate deletedAt is not null", async () => {
