@@ -20,7 +20,8 @@
     "knex": "^0.20.13",
     "mysql": "^2.18.1",
     "dotenv": "^8.2.0",
-    "yup": "^0.30.0"
+    "yup": "^0.30.0",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "eslint": "^7.13.0",
