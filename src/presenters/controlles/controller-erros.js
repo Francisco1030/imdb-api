@@ -1,4 +1,4 @@
-const { NotFoundError, ValidationError } = require('../../shared/utils/errors');
+const { NotFoundError, ValidationError, ServerError } = require('../../shared/utils/errors');
 const HttpResponse = require('../helpers/http-response');
 
 module.exports = class ControllerErrors {
@@ -7,6 +7,6 @@ module.exports = class ControllerErrors {
     if (error instanceof NotFoundError) return HttpResponse.notFoundError(error);
     else if (error instanceof ValidationError) return HttpResponse.badRequest(error);
 
-    return HttpResponse.serverError(error);
+    return HttpResponse.serverError(new ServerError('Erro interno no servidor'));
   }
 };

@@ -1,4 +1,3 @@
-const { ServerError } = require('../../shared/utils/errors');
 module.exports = class HttpResponse {
   static badRequest(error) {
     return {
@@ -10,11 +9,12 @@ module.exports = class HttpResponse {
     };
   }
 
-  static serverError() {
+  static serverError(error) {
     return {
       statusCode: 500,
       body: {
-        error: new ServerError().message,
+        error: error.name,
+        message: error.message,
       },
     };
   }
