@@ -1,7 +1,7 @@
 const bcryptjs = require('bcryptjs');
-const CryptAdpter = require('../../domain/adapters/crypt-adpter');
+const CryptAdapter = require('../../domain/adapters/crypt-adapter');
 
-module.exports = class BcryptAdpter extends CryptAdpter {
+module.exports = class BcryptAdpter extends CryptAdapter {
   constructor() {
     super();
     this.bcryptjs = bcryptjs;
