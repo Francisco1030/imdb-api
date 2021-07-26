@@ -10,10 +10,12 @@ module.exports = class DeleteUserAdminUseCase {
 
   async handle(input) {
     const inputBoundary = new InputBoundary(input);
-    const persistedUser = await this.userRepository.fetchOne(inputBoundary.id);
+    const persistedUser = await this.userRepository.fetchOne({ id: inputBoundary.id });
+    const roleIdAdmin = '8609e912-c66b-4a21-8a38-d2ee0f881d11';
 
-    if (persistedUser.roleId !== 'roleId-admin') throw new ValidationError('Usuario não é admin');
-    const user = new User(persistedUser);
+    if (persistedUser.roleId !== roleIdAdmin) throw new ValidationError('Usuario não é admin');
+    const data = { ...persistedUser, ...inputBoundary };
+    const user = new User(data);
     const userAdminDeleted = await this.userRepository.delete(user);
 
     return new OutputBoundary(userAdminDeleted);
