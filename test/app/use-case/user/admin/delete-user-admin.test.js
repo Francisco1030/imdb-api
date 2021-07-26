@@ -6,7 +6,9 @@ const { ValidationError } = require('../../../../../src/shared/utils/errors');
 const makeUserAdminSpyData = () => ({
   id: 'any-id',
   name: 'any-name',
-  roleId: 'roleId-admin',
+  email: 'any-email',
+  password: 'password',
+  roleId: '8609e912-c66b-4a21-8a38-d2ee0f881d11',
 })
 
 const makeSut = () => {
@@ -42,8 +44,14 @@ describe("use-case: delete user admin", () => {
     const { sut, userAdmin, userRepositorySpy } = makeSut();
     const returnMocks = mockReturnUserAdminRepository(userRepositorySpy, userAdmin);
     const userAdminUpdated = await sut.handle(userAdmin);
+    const expected = {
+      id: returnMocks.id,
+      name: returnMocks.name,
+      email: returnMocks.email,
+      deletedAt: returnMocks.deletedAt,
+    };
 
-    expect(userAdminUpdated).toEqual(returnMocks);
+    expect(userAdminUpdated).toEqual(expected);
   });
 
   test("Should return instanceof OutputBoundary", async () => {
@@ -94,7 +102,7 @@ describe("use-case: delete user admin", () => {
 
     expect(userRepositorySpy.fetchOne).toHaveBeenCalled();
     expect(userRepositorySpy.fetchOne).toHaveBeenCalledTimes(1);
-    expect(userRepositorySpy.fetchOne).toHaveBeenCalledWith(userAdmin.id);
+    expect(userRepositorySpy.fetchOne).toHaveBeenCalledWith({ id: userAdmin.id });
   });
 
   test("Should call handle without parameter", async () => {

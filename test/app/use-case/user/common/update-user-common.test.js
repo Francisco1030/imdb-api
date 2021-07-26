@@ -6,7 +6,9 @@ const { ValidationError } = require('../../../../../src/shared/utils/errors');
 const makeUserCommonSpyData = () => ({
   id: 'any-id',
   name: 'any-name',
-  roleId: 'roleId-common',
+  email: 'any-email',
+  password: 'password',
+  roleId: 'd0fd3a89-486f-4826-ba8b-71e5191867c7',
 })
 
 const makeSut = () => {
@@ -43,7 +45,8 @@ describe("use-case: update user common", () => {
     const returnMocks = mockReturnUserCommonRepository(userRepositorySpy, userCommon);
     const expected = {
       id: returnMocks.id,
-      name: returnMocks.name
+      name: returnMocks.name,
+      email: returnMocks.email,
     };
     const userCommonUpdated = await sut.handle(userCommon);
 
@@ -90,7 +93,7 @@ describe("use-case: update user common", () => {
 
     expect(userRepositorySpy.fetchOne).toHaveBeenCalled();
     expect(userRepositorySpy.fetchOne).toHaveBeenCalledTimes(1);
-    expect(userRepositorySpy.fetchOne).toHaveBeenCalledWith(userCommon.id);
+    expect(userRepositorySpy.fetchOne).toHaveBeenCalledWith({ id: userCommon.id });
   });
 
   test("Should call handle without parameter", async () => {
