@@ -10,7 +10,7 @@ module.exports = class CreateUserAdminController {
   async handle(httpRequest) {
     try {
       const data = httpRequest.body;
-      const userAdmin = this.userFactory.createAdmin(data);
+      const userAdmin = await this.userFactory.createAdmin(data);
       const userCreated = await this.createUserAdminUseCase.handle(userAdmin);
 
       return HttpResponse.created({ ...userCreated });
