@@ -1,4 +1,4 @@
-module.exports = class CryptAdpter {
+module.exports = class CryptAdapter {
   decryptPassword(password, passwordHash) {
     throw new Error('Method not implement');
   }
