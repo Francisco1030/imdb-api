@@ -7,8 +7,8 @@ module.exports = class BcryptAdpter extends CryptAdapter {
     this.bcryptjs = bcryptjs;
   }
 
-  decryptPassword(password, passwordHash) {
-    return this.bcryptjs.compare(password, passwordHash);
+  async decryptPassword(password, passwordHash) {
+    return await this.bcryptjs.compare(password, passwordHash);
   }
 
   async encryptPassword(password) {

@@ -4,7 +4,7 @@ module.exports = class CryptAdapter {
    * @param {String} passwordHash
    * @returns {Boolean}
    */
-  decryptPassword(password, passwordHash) {
+  async decryptPassword(password, passwordHash) {
     throw new Error('Method not implement');
   }
 
