@@ -1,19 +1,16 @@
 const InputBoundary = require('./input-boundary');
 const OutputBoundary = require('./output-boundary');
 const User = require('../../../../../domain/entities/user');
-const { ValidationError } = require('../../../../../shared/utils/errors');
-
 module.exports = class UpdateUserAdminUseCase {
-  constructor({ userRepository } = {}) {
+  constructor({ userRepository, validateUserService } = {}) {
     this.userRepository = userRepository;
+    this.validateUserService = validateUserService;
   }
 
   async handle(input) {
     const inputBoundary = new InputBoundary(input);
-    const persistedUser = await this.userRepository.fetchOne({ id: inputBoundary.id });
-    const roleIdAdmin = '8609e912-c66b-4a21-8a38-d2ee0f881d11';
+    const persistedUser = await this.validateUserService.validateAdmin({ id: inputBoundary.id });
 
-    if (persistedUser.roleId !== roleIdAdmin) throw new ValidationError('Usuario não é admin');
     const data = { ...persistedUser, ...inputBoundary };
     const user = new User(data);
     const userAdminUpdated = await this.userRepository.update(user);
