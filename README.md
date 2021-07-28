@@ -19,8 +19,8 @@
 
 ```
 
-#### Modelo de dados DB
-<img src="doc/modelo-dados.png" width="300">
+### Modelo de dados DB
+<img src="doc/modelo-dados.png" width="600">
 
 ### Documentação
 ```
