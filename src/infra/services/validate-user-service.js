@@ -15,7 +15,7 @@ module.exports = class ValidateUserService {
 
   }
   async validateCommon(id) {
-    const persistedUser = await this.fetchUser({ id });
+    const persistedUser = await this.fetchUser(id);
     const roleIdCommon = 'd0fd3a89-486f-4826-ba8b-71e5191867c7';
 
     this.compareRole(persistedUser, roleIdCommon, 'Usuario é admin');
