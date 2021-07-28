@@ -4,7 +4,8 @@ module.exports = class ExpressRouterAdapter {
       const httpRequest = {
         body: request.body,
         params: request.params,
-        headers: request.headers
+        headers: request.headers,
+        query: request.query
       };
 
       const httpResponse = await router.handle(httpRequest);
