@@ -35,8 +35,21 @@ module.exports = class KnexBaseRepository extends BaseRepository {
     return entity;
   }
 
-  async fetchAll() {
-    const records = await this.queryBuilder(this.table).where({ deletedAt: null });
+  async fetchAll(filters) {
+    const query = this.queryBuilder(this.table)
+      .where({ deletedAt: null });
+
+    let records;
+    const isFilter = Object.keys(filters).length;
+
+    if (isFilter) {
+      [records] = await Promise.all(Object.entries(filters).map(async ([key, value]) =>
+        query.where(key, 'like', `%${value}%`)
+      ));
+    } else {
+      records = await query;
+    }
+
     const entities = records.map((record) => new this.entity(record));
 
     return entities;
