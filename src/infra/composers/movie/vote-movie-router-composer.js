@@ -6,12 +6,19 @@ const KnexMovieVoteRepository = require('../../../infra/repositories/knex/knex-m
 const KnexMovieRepository = require('../../../infra/repositories/knex/knex-movie-repository');
 const KnexUserRepository = require('../../../infra/repositories/knex/knex-user-repository');
 const MovieVoteFactory = require('../../factories/movie-vote-factory');
+const ValidateUserService = require('../../../infra/services/validate-user-service');
 
 module.exports = class VoteMovieRouterComposer {
   static compose() {
+    const userRepository = new KnexUserRepository();
+    const validateUserService = new ValidateUserService({
+      userRepository
+    });
+
     const voteMovieUseCase = new VoteMovieUseCase({
+      userRepository,
+      validateUserService,
       movieRepository: new KnexMovieRepository(),
-      userRepository: new KnexUserRepository(),
       movieVoteRepository: new KnexMovieVoteRepository()
     });
 

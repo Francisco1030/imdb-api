@@ -4,12 +4,19 @@ const VerifyAccessTokenAuthUseCase = require('../../../app/use-case/auth/verify-
 const JwtAccessTokenAdapter = require('../../adapters/jwt-access-token-adapter');
 const KnexMovieRepository = require('../../../infra/repositories/knex/knex-movie-repository');
 const KnexUserRepository = require('../../../infra/repositories/knex/knex-user-repository');
+const ValidateUserService = require('../../../infra/services/validate-user-service');
 
 module.exports = class ListingMovieRouterComposer {
   static compose() {
+    const userRepository = new KnexUserRepository();
+    const validateUserService = new ValidateUserService({
+      userRepository
+    });
+
     const listingMovieUseCase = new ListingMovieUseCase({
-      movieRepository: new KnexMovieRepository(),
-      userRepository: new KnexUserRepository()
+      userRepository,
+      validateUserService,
+      movieRepository: new KnexMovieRepository()
     });
 
     const verifyAccessTokenAuthUseCase = new VerifyAccessTokenAuthUseCase({

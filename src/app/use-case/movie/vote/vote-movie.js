@@ -1,22 +1,22 @@
 const InputBoundary = require('./input-boundary');
 const OutputBoundary = require('./output-boundary');
-const { ValidationError } = require('../../../../shared/utils/errors');
 const MovieVote = require('../../../../domain/entities/movie-vote');
+const { ValidationError } = require('../../../../shared/utils/errors');
 
 
 module.exports = class VoteMovieUseCase {
-  constructor({ movieVoteRepository, movieRepository, userRepository } = {}) {
+  constructor({ movieVoteRepository, movieRepository, userRepository, validateUserService } = {}) {
     this.movieVoteRepository = movieVoteRepository;
     this.movieRepository = movieRepository;
     this.userRepository = userRepository;
+    this.validateUserService = validateUserService;
   }
 
   async handle(input) {
     const inputBoundary = new InputBoundary(input);
     const { userId, movieId, note } = inputBoundary;
-    const persistedUser = await this.userRepository.fetchOne({ id: userId });
-    const roleIdAdmin = '8609e912-c66b-4a21-8a38-d2ee0f881d11';
-    if (persistedUser.roleId !== roleIdAdmin) throw new ValidationError('Usuario não é admin');
+
+    await this.validateUserService.validateAdmin({ id: userId });
     await this.movieRepository.fetchOne({ id: movieId });
 
     if (note > 4 || note < 0) throw new ValidationError('Nota invalida');
