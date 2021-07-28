@@ -18,7 +18,7 @@ module.exports = class BaseCrudRepository {
   /*
    * @returns {Array} entities
    */
-  fetchAll() {
+  fetchAll(filters) {
     throw new Error('Method not implement');
   }
 
