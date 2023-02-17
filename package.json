@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/infra/web-server/index.js",
   "scripts": {
+    "prestart": "npx knex --knexfile src/infra/config/knexfile.js migrate:latest",
     "start": "node src/infra/web-server/index.js",
     "test": "jest  --colors --noStackTrace --passWithNoTests --runInBand --detectOpenHandles --forceExit --silent",
     "db:make": "npx knex --knexfile src/infra/config/knexfile.js migrate:make",
