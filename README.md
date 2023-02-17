@@ -26,3 +26,11 @@
 ```
 https://documenter.getpostman.com/view/14483210/Tzsco6Gx
 ```
+
+### Rodar projeto
+```
+1 - Criar banco de dados imdb_api;
+2 - Criar arquivo .env e colocar os valores do banco mysql;
+3 - Rodar docker-compose up;
+
+```
